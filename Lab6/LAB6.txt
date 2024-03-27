@@ -1,0 +1,23 @@
+Address of student.name: $1 = (char **) 0x7fffffffe230
+
+Address of student.age: $2 = (int *) 0x7fffffffe238
+
+Address of new_name: $3 = (char **) 0x7fffffffe210
+
+Offset_age = 0x000000000008
+
+Offset_name = 0x000000000020
+
+
+Address right after bad() (ret_orig):  0x0000555555555195 <+36>:    mov    -0x8(%rbp),%edx
+
+Address right after print() (ret_new): 0x00005555555551b3 <+66>:    mov    $0x0,%eax
+
+ret_offset = 1E
+
+addr_ret_orig = 0x7fffffffe220
+stack_offset_ret_addr = 0x10
+
+return address of bad(): 0x
+
+

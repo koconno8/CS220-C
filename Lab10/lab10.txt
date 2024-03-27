@@ -1,0 +1,123 @@
+1. Why is the order of print statements in the output inconsistent across multiple runs?
+It is not inconsistent, they are in order each time. 
+
+2. Introduce a 1 second delay by calling the sleep function before the print statement
+in parent. Recompile and run. What is the the difference in ordering of statements
+now and the one before?
+The order switched
+
+3. Add a line to the parent code that prints the process id (pid) of the child. Also, add
+a line to the child that calls getpid() and then prints the process id that is returned.
+Compile and run your modified program. What are the two values?
+Child PID: 3731687
+Parent PID: 3731686
+
+4. Now, print the parent’s process id in both child and parent. You can obtain it by
+calling function getppid(). What are the two values?
+In child
+Parent PID in child: 3733510
+Parent PID in parent: 3712090
+
+5. Add a line to print the value of x in the child after it has been incremented. Add a
+line to print the value of x in the parent after it has been decremented. Recompile
+the program and rerun it. Why isn’t the last value printed 1?
+
+Value of x in child: 2
+Value of x in parent: 0
+
+The order in which the two are done are different and can result in differences here the child runs twice before the parent runs
+
+
+
+////// 1.2 ////////
+
+1. What is the total number of times each of the lines is printed? Why?
+Line 1 - 2
+Line 2 - 4
+Line 3 - 4
+Line 4 - 4
+
+2. Modify the program to print the pids and parent pids. (e.g., printf("%d: %d:
+Line 1\n", getpid(), getppid());)). Capture the output in lab10.txt. Why is
+the parent pid 1 for some processes?
+3749609: 3712090: Line 1
+3749611: 3749609: Line 1
+3749609: 3712090: Line 2
+3749612: 3749609: Line 2
+3749611: 3749609: Line 2
+3749609: 3712090: Line 4
+3749613: 3749611: Line 2
+3749612: 3749609: Line 4
+3749611: 3749609: Line 4
+3749616: 3749611: Line 3
+3749613: 3749611: Line 4
+3749615: 3749612: Line 3
+3749617: 3749613: Line 3
+
+3751331: 3712090: Line 1
+3751332: 3751331: Line 1
+3751331: 3712090: Line 2
+3751333: 3751331: Line 2
+3751332: 3751331: Line 2
+3751334: 3751332: Line 2
+3751331: 3712090: Line 4
+3751333: 3751331: Line 4
+3751332: 3751331: Line 4
+3751334: 3751332: Line 4
+3751335: 3751331: Line 3
+3751336: 1: Line 3
+3751337: 1: Line 3
+3751338: 3751334: Line 3
+
+The parent process may have finished by the time the child processes try to get its parent PID. 
+
+
+////// 1.3 ///////
+
+child pid = 3754197, parent pid = 3754196
+
+///// 3 ///////
+1. Examine the man pages for pthread create, pthread join and pthread exit. Un-
+derstand the different arguments they accept.
+
+
+2. What is the order of print statements in the above code?
+In thread 0
+In thread 0
+In main thread
+In thread 0
+Exiting main thread
+
+3. Create a global variable global var and update the variable in the worker function.
+In each thread, update the variable and print it. If one thread modifies the variable
+does the change reflect in another thread?
+
+global_var = 99, payload = 801
+global_var = 98, payload = 802
+In main thread
+global_var = 97, payload = 803
+Exiting main thread
+
+Since they both are decreasing by 1 you can see it is reflected
+
+
+4. Allocate some memory using malloc in the main thread and pass the pointer to the
+worker thread as the argument. If the memory is modified in main thread, does it
+reflect in the worker thread? Test and verify
+
+The payload value changes so we can see memory was modified
+
+
+/////// 4 ///////
+
+1. Compile the above code. Execute it multiple times consecutively (you can press the
+up arrow to repeat the command). What is your finding?
+
+The value of the sum changes each time
+
+
+2. Now, uncomment mutex lock and mutex unlock in the count function. Repeat the
+previous step. What is your finding? The lock prevents the 2nd thread from making
+changes while the 1st thread is making changes.
+
+The value of the sum stays consistent

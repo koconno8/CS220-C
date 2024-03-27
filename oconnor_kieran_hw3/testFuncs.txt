@@ -1,0 +1,65 @@
+int main() {
+    // Problem 1 Test Cases
+    Node *list1 = (Node *)malloc(sizeof(Node));
+    list1->val = 1;
+    list1->next = (Node *)malloc(sizeof(Node));
+    list1->next->val = 3;
+    list1->next->next = NULL;
+    printf("Total Nodes: %u\n", count_nodes(list1)); // Expected: 2
+
+    Node *list2 = NULL;
+    printf("Total Nodes: %u\n", count_nodes(list2)); // Expected: 0
+
+    Node *list3 = (Node *)malloc(sizeof(Node));
+    list3->val = 1;
+    list3->next = NULL;
+    printf("Total Nodes: %u\n", count_nodes(list3)); // Expected: 1
+
+    // Problem 2 Test Cases
+    unsigned int num = 2;
+    Node **splitLists = split_list(list1, num);
+    printf("Problem 2 Test Case 1:\n");
+    for (unsigned int i = 0; i < num; i++) {
+        Node *current = splitLists[i];
+        while (current != NULL) {
+            printf("%d -> ", current->val);
+            current = current->next;
+        }
+        printf("NULL\n");
+    }
+
+    // Problem 3 Test Cases
+    Node *listA = (Node *)malloc(sizeof(Node));
+    listA->val = 1;
+    listA->next = (Node *)malloc(sizeof(Node));
+    listA->next->val = 3;
+    listA->next->next = NULL;
+
+    Node *listB = (Node *)malloc(sizeof(Node));
+    listB->val = 2;
+    listB->next = (Node *)malloc(sizeof(Node));
+    listB->next->val = 4;
+    listB->next->next = NULL;
+
+    printf("Problem 3 Test Case 1:\n");
+    Node *interleaved = interleave_list(listA, listB);
+    while (interleaved != NULL) {
+        printf("%d -> ", interleaved->val);
+        Node *temp = interleaved;
+        interleaved = interleaved->next;
+        free(temp);
+    }
+    printf("NULL\n");
+
+    // Problem 4 Test Cases
+    float f1 = -23455.232;
+    float f2 = 0;
+    float f3 = -12E-8;
+    float f4 = 2.0;
+    printf("Problem 4 Test Case 1: %d\n", get_float_exponent(f1)); // Expected: 14
+    printf("Problem 4 Test Case 2: %d\n", get_float_exponent(f2)); // Expected: 0
+    printf("Problem 4 Test Case 3: %d\n", get_float_exponent(f3)); // Expected: -23
+    printf("Problem 4 Test Case 4: %d\n", get_float_exponent(f4)); // Expected: 1
+
+    return 0;
+}

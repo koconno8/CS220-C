@@ -1,0 +1,31 @@
+#first run
+koconno8@remote07:~/cs220/Lab5$ ./main_static
+Alternating 40 bytes...
+Successfully allocated 0x5560724c96b0
+free()ing memory at 0x5560724c96b0...DONE
+
+#second run
+koconno8@remote07:~/cs220/Lab5$ ./main_shared
+:error while loading shared libraries: libshared.sp: cannot open shared object file:
+No such file or directory
+
+#Third run
+koconno8@remote07:~/cs220/Lab5$ ./main_shared
+Alternating 40 bytes...
+Successfully allocated 0x558e49da26b0
+free()ing memory at 0x558e49da26b0...DONE
+
+
+
+
+
+#Finishing touches
+koconno8@remote07:~/cs220/Lab5$ ldd main_shared
+linux-vdso.so.1 (0x00007fffe55f3000)
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f50509be000)
+/lib64/ld-linux-x86-64.so.2 (0x00007f5050bcd000)
+
+koconno8@remote07:~/cs220/Lab5$ ldd main_static
+linux-vdso.so.1 (0x00007ffc0fdf9000)
+libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fbbd95ee000)
+/lib64/ld-linux-x86-64.so.2 (0x00007fbbd97fd000)
